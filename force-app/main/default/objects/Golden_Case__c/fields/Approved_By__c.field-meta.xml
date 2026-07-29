@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Approved_By__c</fullName>
+    <label>Approved By</label>
+    <description>User who approved this golden case into the active set.</description>
+    <type>Lookup</type>
+    <referenceTo>User</referenceTo>
+    <relationshipLabel>Golden Cases Approved</relationshipLabel>
+    <relationshipName>Golden_Cases_Approved</relationshipName>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

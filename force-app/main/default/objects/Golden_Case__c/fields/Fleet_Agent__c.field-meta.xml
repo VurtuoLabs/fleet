@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fleet_Agent__c</fullName>
+    <label>Fleet Agent</label>
+    <description>The agent this golden case belongs to.</description>
+    <type>MasterDetail</type>
+    <referenceTo>Fleet_Agent__c</referenceTo>
+    <relationshipLabel>Golden Cases</relationshipLabel>
+    <relationshipName>Golden_Cases</relationshipName>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+</CustomField>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Comparator__c</fullName>
+    <label>Comparator</label>
+    <description>How the actual value is compared to the expected value.</description>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Equals</fullName>
+                <default>true</default>
+                <label>Equals</label>
+            </value>
+            <value>
+                <fullName>Not_Equals</fullName>
+                <default>false</default>
+                <label>Not Equals</label>
+            </value>
+            <value>
+                <fullName>Contains</fullName>
+                <default>false</default>
+                <label>Contains</label>
+            </value>
+            <value>
+                <fullName>Not_Contains</fullName>
+                <default>false</default>
+                <label>Does Not Contain</label>
+            </value>
+            <value>
+                <fullName>Greater_Than</fullName>
+                <default>false</default>
+                <label>Greater Than</label>
+            </value>
+            <value>
+                <fullName>Less_Than</fullName>
+                <default>false</default>
+                <label>Less Than</label>
+            </value>
+            <value>
+                <fullName>Within_Tolerance</fullName>
+                <default>false</default>
+                <label>Within Tolerance</label>
+            </value>
+            <value>
+                <fullName>Semantic_Match</fullName>
+                <default>false</default>
+                <label>Semantic Match</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

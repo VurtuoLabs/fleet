@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Finding_Number__c</fullName>
+    <externalId>false</externalId>
+    <label>Finding Number</label>
+    <type>AutoNumber</type>
+    <displayFormat>F-{00000}</displayFormat>
+</CustomField>

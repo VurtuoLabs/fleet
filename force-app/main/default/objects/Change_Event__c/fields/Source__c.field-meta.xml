@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Source__c</fullName>
+    <description>Change source, matching Fleet_Change_Source__mdt.Source_Key__c.</description>
+    <label>Source</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>DEPLOY</fullName>
+                <default>false</default>
+                <label>Deploy</label>
+            </value>
+            <value>
+                <fullName>KNOWLEDGE</fullName>
+                <default>false</default>
+                <label>Knowledge</label>
+            </value>
+            <value>
+                <fullName>PROMPT</fullName>
+                <default>false</default>
+                <label>Prompt</label>
+            </value>
+            <value>
+                <fullName>MODEL</fullName>
+                <default>false</default>
+                <label>Model</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

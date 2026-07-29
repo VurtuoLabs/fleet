@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Grounding_Sources__c</fullName>
+    <description>JSON array of knowledge sources cited in the response.</description>
+    <label>Grounding Sources</label>
+    <type>LongTextArea</type>
+    <length>32768</length>
+    <visibleLines>5</visibleLines>
+</CustomField>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trace_Key__c</fullName>
+    <description>Third index column: uniqueness tiebreak for a turn. Sized 35 so the index text total (60 + 35 = 95) stays under the platform's Big Object index text budget. A 60/40 split that sums to exactly 100 is rejected at deploy time.</description>
+    <label>Trace Key</label>
+    <type>Text</type>
+    <length>35</length>
+    <required>true</required>
+</CustomField>

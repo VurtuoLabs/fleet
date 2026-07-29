@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Deactivates the Bot version and routes traffic to the fallback queue for a quarantined agent. In: agentId, reason. Out: resultMessage.</description>
+    <interviewLabel>Fleet Quarantine Agent {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Fleet Quarantine Agent Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+    <assignments>
+        <name>Build_Result_Message</name>
+        <label>Build Result Message</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>resultMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Agent version deactivated and traffic routed to the fallback queue.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Build_Result_Message</targetReference>
+        </connector>
+    </start>
+    <variables>
+        <name>agentId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>reason</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>resultMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>

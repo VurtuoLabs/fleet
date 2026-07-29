@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Affected_Artifacts__c</fullName>
+    <description>JSON list of artifacts (flows, prompts, models, KB articles) touched by the change.</description>
+    <label>Affected Artifacts</label>
+    <type>LongTextArea</type>
+    <length>32768</length>
+    <visibleLines>5</visibleLines>
+</CustomField>

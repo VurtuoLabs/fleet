@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Full turn archive. Object-permission only, no record-level sharing. Reads go through FleetTraceService. Index is immutable after first deploy.</description>
+    <label>Fleet Trace</label>
+    <pluralLabel>Fleet Traces</pluralLabel>
+    <indexes>
+        <fullName>Fleet_Trace_Index</fullName>
+        <label>Fleet Trace Index</label>
+        <fields>
+            <name>Org_Agent_Key__c</name>
+            <sortDirection>ASC</sortDirection>
+        </fields>
+        <fields>
+            <name>Occurred_At__c</name>
+            <sortDirection>DESC</sortDirection>
+        </fields>
+        <fields>
+            <name>Trace_Key__c</name>
+            <sortDirection>ASC</sortDirection>
+        </fields>
+    </indexes>
+</CustomObject>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Guided promotion of a calibration run to the blessed baseline, with a diff preview and a confirmation step. In: runId.</description>
+    <interviewLabel>Fleet Bless Baseline {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Fleet Bless Baseline Screen</label>
+    <processType>Flow</processType>
+    <status>Active</status>
+    <screens>
+        <name>Confirm_Bless_Baseline</name>
+        <label>Confirm Bless Baseline</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Baseline_Diff_Preview</name>
+            <fieldText>&lt;p&gt;Review the deviation from the current blessed baseline before promoting this run. Promoting snapshots the run centroids and updates the blessed version for the agent.&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Confirm_Bless_Baseline</targetReference>
+        </connector>
+    </start>
+    <variables>
+        <name>runId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

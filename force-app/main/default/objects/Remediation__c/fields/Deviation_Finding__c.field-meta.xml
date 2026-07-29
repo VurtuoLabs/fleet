@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deviation_Finding__c</fullName>
+    <description>Parent finding this remediation acts on.</description>
+    <label>Deviation Finding</label>
+    <type>MasterDetail</type>
+    <referenceTo>Deviation_Finding__c</referenceTo>
+    <relationshipLabel>Remediations</relationshipLabel>
+    <relationshipName>Remediations</relationshipName>
+    <reparentableMasterDetail>false</reparentableMasterDetail>
+</CustomField>

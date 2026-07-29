@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Change_Key__c</fullName>
+    <description>External Id used to upsert change events idempotently in FleetChangeLedgerService.ingest.</description>
+    <label>Change Key</label>
+    <type>Text</type>
+    <length>128</length>
+    <externalId>true</externalId>
+    <unique>true</unique>
+    <required>false</required>
+</CustomField>

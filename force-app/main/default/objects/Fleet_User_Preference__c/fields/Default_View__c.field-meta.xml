@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Default_View__c</fullName>
+    <description>View the console opens to, matching Fleet_View__mdt.View_Key__c.</description>
+    <label>Default View</label>
+    <type>Text</type>
+    <length>80</length>
+    <required>false</required>
+</CustomField>

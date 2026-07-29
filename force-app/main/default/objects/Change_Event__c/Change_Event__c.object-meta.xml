@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Ledger of deploys, KB publishes, model and prompt edits. Correlation source for attribution. Public Read Only OWD.</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Change Event</label>
+    <nameField>
+        <displayFormat>CE-{000000}</displayFormat>
+        <label>Change Event Number</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Change Events</pluralLabel>
+    <sharingModel>Read</sharingModel>
+</CustomObject>

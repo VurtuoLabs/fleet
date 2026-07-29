@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fleet_Agent__c</fullName>
+    <label>Fleet Agent</label>
+    <description>The agent this run calibrated.</description>
+    <type>Lookup</type>
+    <referenceTo>Fleet_Agent__c</referenceTo>
+    <relationshipLabel>Calibration Runs</relationshipLabel>
+    <relationshipName>Calibration_Runs</relationshipName>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

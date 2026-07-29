@@ -1,0 +1,8 @@
+**/node_modules/**
+**/.vite/**
+**/coverage/**
+**/*.tsbuildinfo
+
+# UI Bundle sources are built by Vite; only the compiled dist ships in the bundle.
+**/uiBundles/**/src/**
+**/uiBundles/**/node_modules/**

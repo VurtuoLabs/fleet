@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <masterLabel>Fleet Engine</masterLabel>
+    <description>Fleet calibration and remediation engine. Chains the golden-set run, embedding prefilter, judge, drift detection, change attribution, and conditional remediation. Authored in Agent Script (Fleet_Engine.agent). Headless: invoked programmatically via the Agent Runtime API from the Fleet UI Bundle, not a chat channel.</description>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>false</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__CustomerWebClient</surface>
+        <surfaceType>CustomerWebClient</surfaceType>
+    </plannerSurfaces>
+    <plannerType>Atlas__ConcurrentMultiAgentOrchestration</plannerType>
+</GenAiPlannerBundle>

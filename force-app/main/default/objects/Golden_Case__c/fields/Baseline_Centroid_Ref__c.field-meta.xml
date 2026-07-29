@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Baseline_Centroid_Ref__c</fullName>
+    <label>Baseline Centroid Ref</label>
+    <description>Reference to the stored embedding centroid used by the semantic prefilter.</description>
+    <type>Text</type>
+    <length>255</length>
+</CustomField>

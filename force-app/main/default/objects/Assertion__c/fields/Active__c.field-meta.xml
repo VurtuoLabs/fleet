@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Active__c</fullName>
+    <label>Active</label>
+    <description>When true, this assertion is evaluated during a run.</description>
+    <type>Checkbox</type>
+    <defaultValue>true</defaultValue>
+</CustomField>

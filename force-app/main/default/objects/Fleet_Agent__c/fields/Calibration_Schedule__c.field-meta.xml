@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Calibration_Schedule__c</fullName>
+    <label>Calibration Schedule</label>
+    <description>Cron expression governing this agent's calibration cadence.</description>
+    <inlineHelpText>A Salesforce cron expression, e.g. 0 0 6 * * ? for daily at 6am.</inlineHelpText>
+    <type>Text</type>
+    <length>100</length>
+</CustomField>
