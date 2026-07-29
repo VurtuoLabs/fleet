@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Action__c</fullName>
+    <description>The remediation action to perform for this finding.</description>
+    <label>Action</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Rollback_Version</fullName>
+                <default>false</default>
+                <label>Rollback Version</label>
+            </value>
+            <value>
+                <fullName>Quarantine</fullName>
+                <default>false</default>
+                <label>Quarantine</label>
+            </value>
+            <value>
+                <fullName>Release</fullName>
+                <default>false</default>
+                <label>Release</label>
+            </value>
+            <value>
+                <fullName>Rebless_Baseline</fullName>
+                <default>false</default>
+                <label>Rebless Baseline</label>
+            </value>
+            <value>
+                <fullName>Update_Golden_Set</fullName>
+                <default>false</default>
+                <label>Update Golden Set</label>
+            </value>
+            <value>
+                <fullName>Notify_Only</fullName>
+                <default>true</default>
+                <label>Notify Only</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

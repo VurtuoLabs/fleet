@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <label>My Agents</label>
+    <protected>false</protected>
+    <values>
+        <field>View_Key__c</field>
+        <value xsi:type="xsd:string">MY_AGENTS</value>
+    </values>
+    <values>
+        <field>Label__c</field>
+        <value xsi:type="xsd:string">My Agents</value>
+    </values>
+    <values>
+        <field>Filter_JSON__c</field>
+        <value xsi:type="xsd:string">{"Owner_Queue_Id__c":"$CURRENT_USER_QUEUES"}</value>
+    </values>
+    <values>
+        <field>Sort_Field__c</field>
+        <value xsi:type="xsd:string">Last_Calibrated_At__c</value>
+    </values>
+    <values>
+        <field>Sort_Direction__c</field>
+        <value xsi:type="xsd:string">DESC</value>
+    </values>
+    <values>
+        <field>Display_Order__c</field>
+        <value xsi:type="xsd:double">4</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

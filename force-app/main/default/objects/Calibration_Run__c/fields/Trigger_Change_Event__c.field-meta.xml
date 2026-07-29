@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trigger_Change_Event__c</fullName>
+    <label>Trigger Change Event</label>
+    <description>The change event that triggered this run, when Trigger Source is Change Event.</description>
+    <type>Lookup</type>
+    <referenceTo>Change_Event__c</referenceTo>
+    <relationshipLabel>Triggered Calibration Runs</relationshipLabel>
+    <relationshipName>Triggered_Calibration_Runs</relationshipName>
+    <deleteConstraint>SetNull</deleteConstraint>
+</CustomField>

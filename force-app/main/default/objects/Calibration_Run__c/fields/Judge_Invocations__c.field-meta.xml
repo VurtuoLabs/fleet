@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Judge_Invocations__c</fullName>
+    <label>Judge Invocations</label>
+    <description>Number of prompt-template judge calls made, i.e. cases in the ambiguous band.</description>
+    <type>Number</type>
+    <precision>18</precision>
+    <scale>0</scale>
+    <defaultValue>0</defaultValue>
+</CustomField>

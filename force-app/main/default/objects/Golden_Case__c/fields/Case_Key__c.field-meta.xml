@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Case_Key__c</fullName>
+    <label>Case Key</label>
+    <description>Stable external identifier for this golden case, unique across the org.</description>
+    <type>Text</type>
+    <length>80</length>
+    <externalId>true</externalId>
+    <unique>true</unique>
+</CustomField>

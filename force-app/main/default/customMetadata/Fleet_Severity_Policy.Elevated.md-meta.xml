@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <label>Elevated</label>
+    <protected>false</protected>
+    <values>
+        <field>Severity__c</field>
+        <value xsi:type="xsd:string">Elevated</value>
+    </values>
+    <values>
+        <field>Auto_Action__c</field>
+        <value xsi:type="xsd:string">Request_Approval</value>
+    </values>
+    <values>
+        <field>Notify_Queue_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Approval_Queue_Id__c</field>
+        <value xsi:nil="true"/>
+    </values>
+    <values>
+        <field>Requires_Custom_Permission__c</field>
+        <value xsi:type="xsd:string">Fleet_Approve_Remediation</value>
+    </values>
+    <values>
+        <field>Auto_Close_After_Days__c</field>
+        <value xsi:type="xsd:double">14</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

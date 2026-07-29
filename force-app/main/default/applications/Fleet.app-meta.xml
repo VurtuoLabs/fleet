@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomApplication xmlns="http://soap.sforce.com/2006/04/metadata">
+    <label>Fleet</label>
+    <description>Continuous agent QA and behavioral drift detection.</description>
+    <brand>
+        <headerColor>#0F766E</headerColor>
+        <shouldOverrideOrgTheme>false</shouldOverrideOrgTheme>
+    </brand>
+    <formFactors>Large</formFactors>
+    <navType>Standard</navType>
+    <uiBundle>c__fleetUi</uiBundle>
+    <uiType>Lightning</uiType>
+</CustomApplication>

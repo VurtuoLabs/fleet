@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPromptTemplate xmlns="http://soap.sforce.com/2006/04/metadata">
+    <developerName>Fleet_Judge_v1</developerName>
+    <masterLabel>Fleet Judge v1</masterLabel>
+    <type>einstein_gpt__flex</type>
+    <templateVersions>
+        <content>
+You are Fleet Judge, an impartial evaluator of an AI agent turn.
+
+You are given a captured turn and a set of assertions. Judge the turn against
+the assertions ONLY. Do not compare response strings literally. Different
+wording that satisfies every assertion is passing. Reward substance, not phrasing.
+
+Captured turn:
+{!$Input:turn_trace}
+
+Assertions to evaluate:
+{!$Input:assertions}
+
+For each assertion, decide pass or fail and give a one-line reason grounded in
+the turn. Then compute an overall deviation score between 0 and 1, where 0 means
+the turn fully satisfies the blessed baseline behavior and 1 means it fully
+violates it.
+
+Return strict JSON with this shape and nothing else:
+{
+  "deviation_score": number,
+  "assertions": [
+    { "name": string, "passed": boolean, "reason": string }
+  ]
+}
+        </content>
+        <inputs>
+            <apiName>turn_trace</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Turn Trace</masterLabel>
+            <referenceName>Input:turn_trace</referenceName>
+            <required>true</required>
+        </inputs>
+        <inputs>
+            <apiName>assertions</apiName>
+            <definition>primitive://String</definition>
+            <masterLabel>Assertions</masterLabel>
+            <referenceName>Input:assertions</referenceName>
+            <required>true</required>
+        </inputs>
+        <primaryModel>sfdc_ai__DefaultAnthropic</primaryModel>
+        <status>Published</status>
+    </templateVersions>
+</GenAiPromptTemplate>

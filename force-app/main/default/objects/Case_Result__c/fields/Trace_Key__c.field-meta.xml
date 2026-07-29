@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Trace_Key__c</fullName>
+    <label>Trace Key</label>
+    <description>Pointer into Fleet_Trace__b for the full turn archive of this result.</description>
+    <type>Text</type>
+    <length>60</length>
+</CustomField>

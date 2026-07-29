@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomMetadata xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <label>Must Escalate</label>
+    <protected>false</protected>
+    <values>
+        <field>Type_Key__c</field>
+        <value xsi:type="xsd:string">MUST_ESCALATE</value>
+    </values>
+    <values>
+        <field>Label__c</field>
+        <value xsi:type="xsd:string">Must Escalate</value>
+    </values>
+    <values>
+        <field>Evaluation_Strategy__c</field>
+        <value xsi:type="xsd:string">Deterministic</value>
+    </values>
+    <values>
+        <field>Requires_Judge__c</field>
+        <value xsi:type="xsd:boolean">false</value>
+    </values>
+    <values>
+        <field>Default_Severity__c</field>
+        <value xsi:type="xsd:string">Critical</value>
+    </values>
+    <values>
+        <field>Active__c</field>
+        <value xsi:type="xsd:boolean">true</value>
+    </values>
+</CustomMetadata>

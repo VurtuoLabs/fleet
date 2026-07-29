@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Registry of monitored Agentforce agents. Reference data (Public Read Only).</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Fleet Agent</label>
+    <nameField>
+        <label>Agent Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Fleet Agents</pluralLabel>
+    <sharingModel>Read</sharingModel>
+</CustomObject>

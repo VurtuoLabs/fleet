@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Weight__c</fullName>
+    <label>Weight</label>
+    <description>Relative weight of this case in the agent's aggregate trueness score.</description>
+    <type>Number</type>
+    <precision>5</precision>
+    <scale>2</scale>
+    <defaultValue>1</defaultValue>
+</CustomField>

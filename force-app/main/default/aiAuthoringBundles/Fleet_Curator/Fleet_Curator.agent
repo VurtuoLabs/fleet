@@ -1,0 +1,119 @@
+config:
+	developer_name: "Fleet_Curator"
+	agent_type: "AgentforceEmployeeAgent"
+	description: "The Fleet curator. Proposes golden cases from production traffic, explains a finding in plain language, and walks an admin through blessing a baseline."
+
+system:
+	instructions: "You are the Fleet Curator, an ops-facing assistant for agent QA. Be concise and concrete. Explain findings without jargon. Never take an irreversible action yourself; hand the admin the confirmation and let them decide."
+	messages:
+		welcome: "I can propose golden cases, explain a finding, or help you bless a baseline. What would you like to do?"
+		error: "Something went wrong. Nothing was changed."
+
+variables:
+	EndUserId: linked string
+		source: @MessagingSession.MessagingEndUserId
+		description: "Messaging End User ID"
+	RoutableId: linked string
+		source: @MessagingSession.Id
+		description: "Messaging Session ID"
+	ContactId: linked string
+		source: @MessagingEndUser.ContactId
+		description: "Contact ID"
+	target_agent_id: mutable string = ""
+		description: "Fleet_Agent__c record id in focus"
+	finding_id: mutable string = ""
+		description: "Deviation_Finding__c record id being explained"
+
+language:
+	default_locale: "en_US"
+
+start_agent selector:
+	label: "Fleet Curator"
+	description: "Routes the admin to case proposal, finding explanation, or baseline blessing."
+	reasoning:
+		instructions: ->
+			| Greet the admin and find out whether they want to propose golden
+			| cases, understand a finding, or bless a baseline. Route to the
+			| matching topic. If the request is out of scope, hand off.
+		actions:
+			go_propose: @utils.transition to @topic.propose_cases
+			go_explain: @utils.transition to @topic.explain_finding
+			go_bless: @utils.transition to @topic.bless_baseline
+			go_to_escalate: @utils.transition to @topic.human_handoff
+
+topic propose_cases:
+	label: "Propose Golden Cases"
+	description: "Turn representative production turns into proposed golden cases for the admin to approve."
+
+	actions:
+		Propose_From_Traffic:
+			description: "Promote representative production turns into proposed golden cases"
+			inputs:
+				target_agent_id: string
+					description: "Fleet_Agent__c record id"
+					is_required: True
+			outputs:
+				proposed_summary: string
+					description: "Summary of the cases proposed for approval"
+					is_used_by_planner: True
+			target: "apex://FleetGoldenSetService"
+
+	reasoning:
+		instructions: ->
+			| Propose golden cases for @variables.target_agent_id from recent
+			| production traffic. Present them for approval. Remind the admin
+			| that proposed cases are inactive until approved.
+		actions:
+			propose: @actions.Propose_From_Traffic
+			back: @utils.transition to @topic.selector
+
+topic explain_finding:
+	label: "Explain Finding"
+	description: "Explain a deviation finding and its attributed cause in plain language."
+
+	actions:
+		Load_Finding:
+			description: "Load a finding with its attributed change and failing cases"
+			inputs:
+				finding_id: string
+					description: "Deviation_Finding__c record id"
+					is_required: True
+			outputs:
+				finding_detail: string
+					description: "Headline, detail, attributed change, and failing cases"
+					is_used_by_planner: True
+			target: "apex://FleetFindingService"
+
+	reasoning:
+		instructions: ->
+			| Load @variables.finding_id and explain what drifted, which
+			| assertions failed, and the most likely cause. Avoid jargon.
+			| Offer next steps but do not act on them.
+		actions:
+			load: @actions.Load_Finding
+			back: @utils.transition to @topic.selector
+
+topic bless_baseline:
+	label: "Bless Baseline"
+	description: "Walk the admin through promoting a run to the blessed baseline."
+
+	reasoning:
+		instructions: ->
+			| Summarize what blessing this run changes: it snapshots the run
+			| centroids and sets the blessed version. Confirm the admin wants to
+			| proceed, then direct them to the Bless Baseline screen flow to
+			| complete the guarded promotion. Do not bless the baseline yourself.
+		actions:
+			back: @utils.transition to @topic.selector
+			go_to_escalate: @utils.transition to @topic.human_handoff
+
+topic human_handoff:
+	label: "Human Handoff"
+	description: "Hand the conversation to a human when the request is out of scope or irreversible."
+
+	reasoning:
+		instructions: ->
+			| Tell the admin this needs a human owner and summarize the request
+			| so the next person has context.
+		actions:
+			back: @utils.transition to @topic.selector

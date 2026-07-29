@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Fleet design tokens.
+  A cool telemetry palette, deliberately off the SLDS blue so the console reads
+  as an operations surface rather than a record.
+    primary teal    #0F766E  (brandDark #115E59)
+    accent sky      #0EA5E9
+    success         #15803D
+    warning         #014486
+    severity/rose   #BE123C
+    page #EEF2F2 · surface #FFFFFF · border #DCE3E3 · text #0F1B1A · radius 4px
+  Values are HSL channels (H S% L%) consumed by tailwind.config.ts as
+  hsl(var(--token) / <alpha-value>). Light and dark share one token surface.
+*/
+
+@layer base {
+  :root,
+  .light {
+    --background: 0 0% 100%; /* page   #FFFFFF */
+    --foreground: 176 29% 8%; /* text   #0F1B1A */
+
+    --surface: 0 0% 100%; /* #FFFFFF */
+    --card: 0 0% 100%;
+    --card-foreground: 176 29% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 176 29% 8%;
+
+    --primary: 175 77% 26%; /* teal   #0F766E */
+    --primary-dark: 176 69% 22%; /* #115E59 */
+    --primary-foreground: 0 0% 100%;
+
+    --accent: 199 89% 48%; /* sky    #0EA5E9 */
+    --accent-foreground: 0 0% 100%;
+
+    --secondary: 180 14% 90%;
+    --secondary-foreground: 176 29% 8%;
+
+    --muted: 180 14% 90%;
+    --muted-foreground: 176 8% 32%; /* weak #4B5857 */
+
+    --success: 142 72% 29%; /* #15803D */
+    --success-foreground: 0 0% 100%;
+
+    --warning: 210 94% 26%; /* #014486 */
+    --warning-foreground: 0 0% 100%;
+
+    --destructive: 347 82% 41%; /* rose #BE123C */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 180 10% 88%; /* #DCE3E3 */
+    --border-strong: 180 8% 77%; /* #BFC9C9 */
+    --input: 180 10% 88%;
+    --ring: 175 77% 26%;
+
+    --radius: 4px;
+  }
+
+  .dark {
+    --background: 185 30% 7%;
+    --foreground: 180 15% 92%;
+
+    --surface: 190 24% 10%;
+    --card: 190 24% 10%;
+    --card-foreground: 180 15% 92%;
+    --popover: 190 24% 10%;
+    --popover-foreground: 180 15% 92%;
+
+    --primary: 173 60% 42%;
+    --primary-dark: 175 65% 30%;
+    --primary-foreground: 185 40% 6%;
+
+    --accent: 199 89% 55%;
+    --accent-foreground: 185 40% 6%;
+
+    --secondary: 190 18% 16%;
+    --secondary-foreground: 180 15% 92%;
+
+    --muted: 190 18% 16%;
+    --muted-foreground: 180 8% 60%;
+
+    --success: 142 60% 45%;
+    --success-foreground: 185 40% 6%;
+
+    --warning: 210 90% 62%;
+    --warning-foreground: 185 40% 6%;
+
+    --destructive: 347 78% 55%;
+    --destructive-foreground: 185 40% 6%;
+
+    --border: 190 15% 18%;
+    --border-strong: 190 13% 26%;
+    --input: 190 15% 18%;
+    --ring: 173 60% 42%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family:
+      "Inter", -apple-system, system-ui, Arial, sans-serif;
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring;
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /* Chart line draw-in. Held behind prefers-reduced-motion in the chart itself,
+     which passes the animation only when motion is welcome. */
+  @keyframes fleet-draw {
+    from {
+      stroke-dashoffset: 2400;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  /* The dashboard's chart/breakdown split collapses to one column before the
+     donut card gets too narrow to read its legend rows. */
+  @media (max-width: 1100px) {
+    .fleet-dash-split {
+      grid-template-columns: minmax(0, 1fr) !important;
+    }
+  }
+
+  /* cmdk marks the keyboard-highlighted row with data-selected; it ships no
+     styles of its own, so this is the only visual feedback arrow-key users get. */
+  [cmdk-item][data-selected="true"] {
+    background: hsl(var(--background));
+  }
+  [cmdk-item]:active {
+    background: hsl(var(--secondary));
+  }
+
+  /* cmdk's overlay takes a className, not a style prop. */
+  .fleet-cmdk-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 27, 26, 0.32);
+    z-index: 90;
+  }
+
+  /* Space Grotesk for headings, KPI numerals, tab labels, the wordmark. */
+  .font-head {
+    font-family: "Space Grotesk", "Inter", system-ui, sans-serif;
+  }
+  /* JetBrains Mono for metrics, scores, case ids. */
+  .font-mono {
+    font-family: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+  }
+  .border-strong {
+    border-color: hsl(var(--border-strong));
+  }
+
+  /* Thin, quiet scrollbars for the telemetry surfaces. */
+  .fleet-scroll {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border-strong)) transparent;
+  }
+  .fleet-scroll::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .fleet-scroll::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--border-strong));
+    border-radius: 99px;
+  }
+  .fleet-scroll::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}

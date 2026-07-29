@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Setup wizard to onboard an agent: pick the agent, set the calibration schedule and owner queue, and seed starter golden cases. In: agentId.</description>
+    <interviewLabel>Fleet Onboard Agent {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Fleet Onboard Agent Screen</label>
+    <processType>Flow</processType>
+    <status>Active</status>
+    <screens>
+        <name>Onboard_Agent_Setup</name>
+        <label>Onboard Agent Setup</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <fields>
+            <name>Calibration_Schedule</name>
+            <dataType>String</dataType>
+            <fieldText>Calibration Schedule (cron)</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>Owner_Queue_Id</name>
+            <dataType>String</dataType>
+            <fieldText>Owner Queue Id</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Onboard_Agent_Setup</targetReference>
+        </connector>
+    </start>
+    <variables>
+        <name>agentId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

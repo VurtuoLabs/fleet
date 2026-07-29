@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Density__c</fullName>
+    <description>Table row density preference for the console.</description>
+    <label>Density</label>
+    <type>Picklist</type>
+    <required>false</required>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Comfortable</fullName>
+                <default>true</default>
+                <label>Comfortable</label>
+            </value>
+            <value>
+                <fullName>Compact</fullName>
+                <default>false</default>
+                <label>Compact</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

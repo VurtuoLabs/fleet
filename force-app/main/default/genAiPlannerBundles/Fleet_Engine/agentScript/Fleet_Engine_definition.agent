@@ -1,0 +1,201 @@
+config:
+	developer_name: "Fleet_Engine"
+	agent_type: "AgentforceEmployeeAgent"
+	description: "Fleet calibration and remediation engine. Executes golden sets, scores deviation from the blessed baseline, attributes drift to change events, and drives remediation. Uses the planner run keyword for action chaining and filter_from_agent for conditional remediation."
+
+system:
+	instructions: "You are the Fleet calibration and remediation engine. You are deterministic and cost-aware. Never call the judge when the embedding prefilter can resolve a case. Judge against assertions, never against literal strings."
+	messages:
+		welcome: "Fleet Engine ready."
+		error: "Fleet Engine hit an error. The run is left in a partial, readable state."
+
+variables:
+	EndUserId: linked string
+		source: @MessagingSession.MessagingEndUserId
+		description: "Messaging End User ID"
+	RoutableId: linked string
+		source: @MessagingSession.Id
+		description: "Messaging Session ID"
+	ContactId: linked string
+		source: @MessagingEndUser.ContactId
+		description: "Contact ID"
+	target_agent_id: mutable string = ""
+		description: "Fleet_Agent__c record id currently under calibration"
+	needs_judge: mutable boolean = False
+		description: "True when the current case falls in the ambiguous prefilter band"
+	failed_count: mutable number = 0
+		description: "Count of cases scored below threshold in this run"
+
+language:
+	default_locale: "en_US"
+
+start_agent entry:
+	label: "Fleet Engine Entry"
+	description: "Entry point for the calibration and remediation loop."
+	reasoning:
+		instructions: ->
+			| Begin a calibration cycle for @variables.target_agent_id.
+			| Transition to run_calibration.
+		actions:
+			go_calibrate: @utils.transition to @topic.run_calibration
+
+topic run_calibration:
+	label: "Run Calibration"
+	description: "Execute the golden set against a monitored agent and score deviation from the blessed baseline."
+
+	actions:
+		Load_Golden_Set:
+			description: "Retrieve active golden cases for the target agent"
+			inputs:
+				target_agent_id: string
+					description: "Fleet_Agent__c record id"
+					is_required: True
+			outputs:
+				case_payload: string
+					description: "Serialized cases with assertions"
+					is_used_by_planner: True
+			target: "apex://FleetGoldenSetService"
+
+		Prefilter_By_Embedding:
+			description: "Compare the response embedding to the blessed centroid"
+			inputs:
+				turn_trace: string
+					description: "Captured turn"
+					is_required: True
+			outputs:
+				needs_judge: boolean
+					description: "True when the case falls in the ambiguous band"
+					is_used_by_planner: True
+			target: "apex://FleetJudgeService"
+
+		Score_Deviation:
+			description: "Judge the captured turn against the case assertions"
+			inputs:
+				"Input:turn_trace": string
+					description: "Captured turn"
+					is_required: True
+				"Input:assertions": string
+					description: "Case assertions"
+					is_required: True
+			outputs:
+				promptResponse: string
+					description: "Per-assertion verdict and deviation score"
+					is_used_by_planner: True
+					is_displayable: False
+			target: "generatePromptResponse://Fleet_Judge_v1"
+
+	reasoning:
+		instructions: ->
+			| Load the golden set for @variables.target_agent_id.
+			| For each case, invoke the target agent and capture the turn.
+			| Run the embedding prefilter first. Only call the judge when
+			| needs_judge is True. This controls cost and is not optional.
+			| Do not compare response strings literally. Judge against the
+			| assertions only. Different wording that satisfies every
+			| assertion is passing.
+			| Set @variables.failed_count for each case below threshold.
+			| When all cases are scored, transition to assess_deviation.
+		actions:
+			load: run @actions.Load_Golden_Set
+			prefilter: run @actions.Prefilter_By_Embedding
+			score: run @actions.Score_Deviation
+			go_assess: @utils.transition to @topic.assess_deviation
+
+topic assess_deviation:
+	label: "Assess Deviation"
+	description: "Run every active drift detector over the scored run and flag detectors that breach their threshold."
+
+	actions:
+		Detect_Drift:
+			description: "Run all active Fleet_Drift_Detector detectors for the target agent window"
+			inputs:
+				target_agent_id: string
+					description: "Fleet_Agent__c record id"
+					is_required: True
+			outputs:
+				drift_signals: string
+					description: "Serialized drift signals with detector key, statistic, and breach flag"
+					is_used_by_planner: True
+			target: "apex://FleetDriftService"
+
+	reasoning:
+		instructions: ->
+			| Run the drift detectors for @variables.target_agent_id.
+			| A detector breaches when its statistic exceeds its configured
+			| threshold over the minimum sample. If no detector breaches and
+			| @variables.failed_count is zero, the agent is in true; end here.
+			| Otherwise transition to attribute_change.
+		actions:
+			detect: run @actions.Detect_Drift
+			go_attribute: @utils.transition to @topic.attribute_change
+
+topic attribute_change:
+	label: "Attribute Change"
+	description: "Correlate each changepoint against Change_Event records inside each source's window and return the most likely cause with a confidence."
+
+	actions:
+		Attribute_Change:
+			description: "Correlate a changepoint against change events within the source windows"
+			inputs:
+				target_agent_id: string
+					description: "Fleet_Agent__c record id"
+					is_required: True
+			outputs:
+				attribution_result: string
+					description: "Attributed change key and confidence"
+					is_used_by_planner: True
+			target: "apex://FleetAttributionService"
+
+	reasoning:
+		instructions: ->
+			| Correlate the detected changepoints for @variables.target_agent_id
+			| against Change_Event records inside each source's correlation window.
+			| Return the most likely cause and a confidence. When attribution is
+			| complete, transition to remediate.
+		actions:
+			attribute: run @actions.Attribute_Change
+			go_remediate: @utils.transition to @topic.remediate
+
+topic remediate:
+	label: "Remediate"
+	description: "Open findings and drive remediation. Conditional on severity policy: notify, request approval, or quarantine."
+
+	actions:
+		Open_Finding:
+			description: "Open a deviation finding with attribution and grant sharing to the owner queue"
+			inputs:
+				target_agent_id: string
+					description: "Fleet_Agent__c record id"
+					is_required: True
+				attribution_result: string
+					description: "Attributed change key and confidence"
+					is_required: True
+			outputs:
+				finding_id: string
+					description: "Opened Deviation_Finding__c record id"
+					is_used_by_planner: True
+			target: "apex://FleetFindingService"
+
+		Propose_Remediation:
+			description: "Propose a remediation for the finding per the severity policy"
+			inputs:
+				finding_id: string
+					description: "Deviation_Finding__c record id"
+					is_required: True
+			outputs:
+				remediation_summary: string
+					description: "Proposed action and required approval"
+					is_used_by_planner: True
+			target: "apex://FleetRemediationService"
+
+	reasoning:
+		instructions: ->
+			| Open a finding for the attributed deviation. Then read the severity
+			| policy for the finding. Use filter_from_agent to choose exactly one
+			| path: notify only for Advisory, request approval for Elevated, or
+			| quarantine for Critical. Never quarantine an agent for an Advisory
+			| finding. Propose the remediation and stop; a human approves the
+			| irreversible actions.
+		actions:
+			open: run @actions.Open_Finding
+			propose: run @actions.Propose_Remediation

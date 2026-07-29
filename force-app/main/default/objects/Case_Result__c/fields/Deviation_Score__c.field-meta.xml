@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Deviation_Score__c</fullName>
+    <label>Deviation Score</label>
+    <description>Distance from the blessed baseline, 0 (identical) to 1 (maximally divergent).</description>
+    <type>Number</type>
+    <precision>5</precision>
+    <scale>4</scale>
+</CustomField>

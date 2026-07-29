@@ -1,0 +1,19 @@
+{
+  "name": "fleet",
+  "version": "1.0.0",
+  "description": "Fleet - continuous agent QA and behavioral drift detection for Agentforce.",
+  "private": true,
+  "scripts": {
+    "auth": "bash scripts/auth.sh",
+    "deploy": "bash scripts/deploy.sh",
+    "ui:install": "npm --prefix force-app/main/default/uiBundles/fleetUi install",
+    "ui:dev": "npm --prefix force-app/main/default/uiBundles/fleetUi run dev",
+    "ui:build": "npm --prefix force-app/main/default/uiBundles/fleetUi run build",
+    "graphql:schema": "npm --prefix force-app/main/default/uiBundles/fleetUi run graphql:schema",
+    "graphql:codegen": "npm --prefix force-app/main/default/uiBundles/fleetUi run graphql:codegen",
+    "apex:test": "sf apex run test --result-format human --code-coverage --wait 20"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

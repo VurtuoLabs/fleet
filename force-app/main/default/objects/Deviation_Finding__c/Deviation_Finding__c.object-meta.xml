@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <deploymentStatus>Deployed</deploymentStatus>
+    <description>Detected behavioral drift with attribution. Private OWD: may contain customer utterances. Access via Apex managed sharing (FleetSharingService) or View All in Fleet_Administrator.</description>
+    <enableActivities>true</enableActivities>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <label>Deviation Finding</label>
+    <nameField>
+        <label>Finding Name</label>
+        <type>Text</type>
+    </nameField>
+    <pluralLabel>Deviation Findings</pluralLabel>
+    <sharingModel>Private</sharingModel>
+    <sharingReasons>
+        <fullName>Fleet_Agent_Owner__c</fullName>
+        <label>Fleet Agent Owner</label>
+    </sharingReasons>
+</CustomObject>

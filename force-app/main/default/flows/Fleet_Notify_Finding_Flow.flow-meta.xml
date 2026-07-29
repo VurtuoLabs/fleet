@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>61.0</apiVersion>
+    <description>Notifies the owning team when a deviation finding is opened. Admins edit this flow to change who is told and how. In: findingId, severity. Out: notificationMessage.</description>
+    <interviewLabel>Fleet Notify Finding {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Fleet Notify Finding Flow</label>
+    <processType>AutoLaunchedFlow</processType>
+    <status>Active</status>
+    <assignments>
+        <name>Build_Notification_Message</name>
+        <label>Build Notification Message</label>
+        <locationX>176</locationX>
+        <locationY>158</locationY>
+        <assignmentItems>
+            <assignToReference>notificationMessage</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <stringValue>Fleet finding notification dispatched to the owning team.</stringValue>
+            </value>
+        </assignmentItems>
+    </assignments>
+    <start>
+        <locationX>50</locationX>
+        <locationY>50</locationY>
+        <connector>
+            <targetReference>Build_Notification_Message</targetReference>
+        </connector>
+    </start>
+    <variables>
+        <name>findingId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>severity</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>notificationMessage</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+</Flow>
