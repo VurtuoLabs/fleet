@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.vite/
+coverage/
+.sf/
+.sfdx/
+*.log
+
+# OS / editor cruft
+.DS_Store
+.idea/
+.vscode/
+
+# TypeScript build info
+*.tsbuildinfo
+
+.claude/
