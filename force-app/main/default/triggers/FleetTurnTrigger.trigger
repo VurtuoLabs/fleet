@@ -1,5 +1,5 @@
 /**
- * Fleet — tap on the agent-turn stream (CONTRACT §9.1).
+ * Fleet - tap on the agent-turn stream (CONTRACT §9.1).
  *
  * after insert on Fleet_Turn__e only. Thin by design: it delegates to
  * FleetTurnTriggerHandler.handleAfterInsert, which forwards to
