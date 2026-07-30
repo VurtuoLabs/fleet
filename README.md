@@ -107,6 +107,17 @@ fleet/
   docs/                           design notes
 ```
 
+## Screenshots
+
+Captured from a live org at a 1200px viewport.
+
+| | |
+|---|---|
+| ![Dashboard](docs/screenshots/01-dashboard.png) | ![Agents](docs/screenshots/02-agents.png) |
+| **Dashboard.** Is every monitored agent still behaving the way we approved? Trueness against threshold leads, because that is the number that decides whether anyone needs to act. | **Agents.** Every monitored agent with its trueness, blessed version, quarantine state and last calibration. |
+| ![Drift](docs/screenshots/03-drift.png) | ![Findings](docs/screenshots/04-findings.png) |
+| **Drift.** Trueness over 72 hours for one agent against the rest of the fleet, with change events marked on the same timeline so a drop lines up with what caused it. | **Findings.** Detected drift, the change it was attributed to with a confidence score, and the action taken. Rollback and hold are one click from the finding. |
+
 ## License
 
 MIT. Copyright (c) 2026 VurtuoLabs. See [LICENSE](LICENSE).
