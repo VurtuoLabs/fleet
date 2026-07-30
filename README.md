@@ -109,4 +109,4 @@ fleet/
 
 ## License
 
-MIT. Copyright (c) 2026 VurtuoLabs. See [LICENSE](LICENSE).
+MIT. Copyright (c) 2026 VurtuoLabs
